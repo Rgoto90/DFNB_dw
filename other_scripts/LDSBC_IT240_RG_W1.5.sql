@@ -40,7 +40,7 @@ SELECT TOP 7 p.businessEntityID
 FROM Person.Person AS p
 ORDER BY 3 DESC
 	   , 8 DESC
-	   , 5 DESC
+	   , 5 DESC;
 
 
 
@@ -112,6 +112,5 @@ select top 10 s1.departmentID
 group by  s1.departmentID
 		, s1.departmentName
 		, s1.Gender
-order by 6
+order by 6 desc
 
-	 
