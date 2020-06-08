@@ -1,0 +1,190 @@
+USE [DFNB2]
+GO
+
+/****** Object:  View [dbo].[Varea]    Script Date: 08/06/2020 11:25:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create view [dbo].[Varea] as 
+
+select acct_area_id
+	  ,count(acct_area_id) as Account_Qtd_by_Area
+	  ,sum(loan_amt) as Loan_Amount
+	  ,year(open_date)  as [Year]
+	   from [dbo].[stg_p1]
+where year(open_date)>=2017
+group by acct_area_id,year(open_date) 
+GO
+
+
+------------------------------------------------------------------------------------------------
+
+
+
+USE [DFNB2]
+GO
+
+/****** Object:  View [dbo].[Vbranch]    Script Date: 08/06/2020 11:26:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create view [dbo].[Vbranch] as 
+
+select branch_id
+
+	  ,count(acct_id) as Account_Qtd_by_Branch
+	  ,sum(loan_amt) as Loan_Amount
+	  ,year(open_date)  as [Year]
+	   from [dbo].[stg_p1]
+where year(open_date)>=2017
+group by acct_area_id,year(open_date),branch_id
+GO
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+USE [DFNB2]
+GO
+
+/****** Object:  View [dbo].[Vcustomer]    Script Date: 08/06/2020 11:27:23 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+/*Q: What was our performance last year compared to the previous two years in these terms?
+
+Measures:
+ Count of Accounts
+Loan Amount
+Current Balance
+Entities:
+The Bank
+Areas
+Regions
+Branches
+Products
+Customers
+New vs. Existing
+*/
+--Vregion
+--Varea 
+--Vbranch
+--Vproduct
+--Vcustomer
+
+create view [dbo].[Vcustomer] as 
+
+select cust_id
+	  ,count(acct_id) as Account_Qtd_by_Branch
+	  ,sum(loan_amt) as Loan_Amount
+	  ,year(open_date)  as [Year]
+	   from [dbo].[stg_p1]
+where year(open_date)>=2017
+group by acct_area_id,year(open_date),cust_id
+-- order by 1
+GO
+
+------------------------------------------------------------------------------------------------
+
+USE [DFNB2]
+GO
+
+/****** Object:  View [dbo].[Vproduct]    Script Date: 08/06/2020 11:27:43 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+/*Q: What was our performance last year compared to the previous two years in these terms?
+
+Measures:
+ Count of Accounts
+Loan Amount
+Current Balance
+Entities:
+The Bank
+Areas
+Regions
+Branches
+Products
+Customers
+New vs. Existing
+*/
+--Vregion
+--Varea 
+--Vbranch
+--Vproduct
+
+create view [dbo].[Vproduct] as 
+
+select prod_id
+	  ,branch_id
+	  ,acct_area_id
+	  ,acct_region_id
+	  ,count(acct_id) as Account_Qtd_by_Branch
+	  ,sum(loan_amt) as Loan_Amount
+	  ,year(open_date)  as [Year]
+	   from [dbo].[stg_p1]
+where year(open_date)>=2017
+group by acct_area_id,year(open_date),branch_id,branch_id
+	  ,acct_area_id
+	  ,acct_region_id,prod_id
+ --order by 1
+GO
+
+--------------------------------------------------------------------------------------------------
+
+USE [DFNB2]
+GO
+
+/****** Object:  View [dbo].[Vregion]    Script Date: 08/06/2020 11:28:14 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+/*Q: What was our performance last year compared to the previous two years in these terms?
+
+Measures:
+ Count of Accounts
+Loan Amount
+Current Balance
+Entities:
+The Bank
+Areas
+Regions
+Branches
+Products
+Customers
+New vs. Existing
+*/
+
+--select top 1 * from [dbo].[stg_p1]
+--order by 1
+
+--select * from Vregion 
+
+CREATE view [dbo].[Vregion] as 
+
+select acct_id
+	   ,count(acct_id) as Account_Qtd
+	  ,sum(loan_amt) as Loan_Amount
+	  ,acct_branch_desc as Region
+	  ,year(open_date) Year
+	   from [dbo].[stg_p1]
+where year(open_date)>=2017
+group by acct_branch_desc,open_date,acct_id
+GO
+
+
+
