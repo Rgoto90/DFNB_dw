@@ -1,6 +1,21 @@
---[as_of_date][acct_id3][cur_bal] ACCOUNT FACT TABLE
+USE [DFNB2]
+GO
 
-SELECT 
-[as_of_date],[acct_id3],[cur_bal]
-INTO TBL_ACCOUNT_FACT
-FROM [dbo].[stg_p1]
+/****** Object:  Table [dbo].[TBL_ACCOUNT_FACT]    Script Date: 25/06/2020 21:51:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TBL_ACCOUNT_FACT](
+	[as_of_date] [date] NOT NULL,
+	[acct_id3] [int] NOT NULL,
+	[cur_bal] [decimal](20, 4) NOT NULL,
+ CONSTRAINT [acct_id3] PRIMARY KEY CLUSTERED 
+(
+	[acct_id3] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
