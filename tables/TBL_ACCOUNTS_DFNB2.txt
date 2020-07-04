@@ -1,0 +1,35 @@
+--*
+/**NAME: CRATION OF TABLE TBL_ACCOUNTS
+Date:07/03/2020 
+Author:RODRIGO GOTO 
+*/
+
+
+USE [DFNB3]
+GO
+
+/****** Object:  Table [dbo].[tbl_accounts]    Script Date: 03/07/2020 21:19:14 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tbl_accounts](
+	[account_id] [int] NOT NULL,
+	[customer_id] [int] NULL,
+	[account_type] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[account_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tbl_accounts]  WITH CHECK ADD  CONSTRAINT [FK_cust_id] FOREIGN KEY([customer_id])
+REFERENCES [dbo].[tbl_customers_dim] ([customer_id])
+GO
+
+ALTER TABLE [dbo].[tbl_accounts] CHECK CONSTRAINT [FK_cust_id]
+GO
+

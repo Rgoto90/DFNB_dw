@@ -1,0 +1,43 @@
+USE [DFNB3]
+GO
+
+/****** Object:  Table [dbo].[tbl_processors]    Script Date: 03/07/2020 21:37:13 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[tbl_processors](
+	[processorid] [smallint] IDENTITY(1,1) NOT NULL,
+	[adminid] [int] NOT NULL,
+	[datecreated] [date] NOT NULL,
+	[processoronoff] [smallint] NOT NULL,
+	[processorname] [varchar](155) NOT NULL,
+	[processordesc] [varchar](max) NOT NULL,
+	[processorpocname] [varchar](200) NOT NULL,
+	[processorpocphone] [varchar](200) NOT NULL,
+	[processorpocemail] [varchar](200) NOT NULL,
+	[processorfax] [varchar](200) NOT NULL,
+	[processordisputefaxemail] [varchar](max) NOT NULL,
+	[processorurl] [varchar](200) NOT NULL,
+	[reasoncodemsgregex] [varchar](max) NOT NULL,
+	[processortppids] [varchar](max) NOT NULL,
+	[categoryid] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[processorid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[tbl_processors] ADD  DEFAULT ('0') FOR [adminid]
+GO
+
+ALTER TABLE [dbo].[tbl_processors] ADD  DEFAULT ('1') FOR [processoronoff]
+GO
+
+ALTER TABLE [dbo].[tbl_processors] ADD  DEFAULT ('0') FOR [categoryid]
+GO
+
+
