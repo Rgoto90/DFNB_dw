@@ -1,0 +1,17 @@
+USE [DFNB2]
+GO
+
+/****** Object:  View [dbo].[V_top10_volume]    Script Date: 05/07/2020 21:03:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE view [dbo].[V_top10_volume] as
+select top 10 sum(tran_amt) Volume,branch_id from [dbo].[tbl_branch]
+group by branch_id
+--order by 1 desc
+GO
+

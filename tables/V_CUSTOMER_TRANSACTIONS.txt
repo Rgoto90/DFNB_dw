@@ -1,0 +1,19 @@
+USE [DFNB2]
+GO
+
+/****** Object:  View [dbo].[V_CUSTOMER_TRANSACTIONS]    Script Date: 05/07/2020 20:55:30 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE view [dbo].[V_CUSTOMER_TRANSACTIONS]
+AS SELECT b.branch_id,CUST_ID
+,sum(TRAN_AMT/1000 + TRAN_fee_AMT)/100000 AS TOTAL_PROFITABILITY FROM [dbo].[tbl_customers_fact] cf
+INNER JOIN [dbo].[tbl_branch] b ON
+cf.ACCT_BRANCH_ID = b.[branch_id]
+--where b.branch_id = 1
+GROUP BY b.branch_id,CUST_ID
+GO
+

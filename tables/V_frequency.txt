@@ -1,0 +1,15 @@
+USE [DFNB2]
+GO
+
+/****** Object:  View [dbo].[V_frequency]    Script Date: 05/07/2020 20:59:16 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE view [dbo].[V_frequency] as
+select top 10 count(tran_time) Frequency_count,branch_id from [dbo].[tbl_transactions_type]
+group by branch_id
+GO
+

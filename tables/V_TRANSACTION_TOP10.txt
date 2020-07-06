@@ -1,0 +1,16 @@
+USE [DFNB2]
+GO
+
+/****** Object:  View [dbo].[V_TRANSACTION_TOP10]    Script Date: 05/07/2020 21:05:21 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE view [dbo].[V_TRANSACTION_TOP10] as
+select tran_type_id, COUNT(tran_type_code)TRAN_TYPE_QTD,tran_type_desc from [dbo].[tbl_transactions_fact]
+group by tran_type_id,[tran_type_desc]
+GO
+
